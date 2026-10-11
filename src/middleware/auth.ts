@@ -28,14 +28,20 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
 export function requireRole(...roles: UserRole[]) {
   return (req: Request, res: Response, next: NextFunction) => {
     if (!req.user || !roles.includes(req.user.role)) {
-      throw new HttpError(403, 'You do not have permission to perform this action');
+      throw new HttpError(
+        403,
+        'You do not have permission to perform this action',
+      );
     }
     next();
   };
 }
 
 // Allows req.user.id === resourceOwnerId OR one of the given roles.
-export function requireSelfOrRole(resourceOwnerId: (req: Request) => number, ...roles: UserRole[]) {
+export function requireSelfOrRole(
+  resourceOwnerId: (req: Request) => number,
+  ...roles: UserRole[]
+) {
   return (req: Request, res: Response, next: NextFunction) => {
     if (!req.user) {
       throw new HttpError(401, 'Missing or malformed Authorization header');
@@ -44,6 +50,9 @@ export function requireSelfOrRole(resourceOwnerId: (req: Request) => number, ...
       next();
       return;
     }
-    throw new HttpError(403, 'You do not have permission to perform this action');
+    throw new HttpError(
+      403,
+      'You do not have permission to perform this action',
+    );
   };
 }
