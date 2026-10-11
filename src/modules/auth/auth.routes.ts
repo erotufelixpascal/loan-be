@@ -13,6 +13,7 @@ const authService = new AuthService();
  *   post:
  *     summary: Register a new client account
  *     tags: [Auth]
+ *     security: []
  *     responses:
  *       201:
  *         description: Created
@@ -39,6 +40,7 @@ authRouter.post(
  *   post:
  *     summary: Log in with email and password
  *     tags: [Auth]
+ *     security: []
  *     responses:
  *       200:
  *         description: OK
